@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+
 import "./menuItem/menuItem.styles.scss";
 
 export interface MenuItemProps {
@@ -10,7 +12,13 @@ export interface MenuItemProps {
   size?: "large";
 }
 
-function MenuItem({ menuItem }: { menuItem: MenuItemProps }) {
+interface Props extends RouteComponentProps {
+  menuItem: MenuItemProps;
+}
+
+function _MenuItem(props: Props) {
+  const { menuItem } = props;
+
   return (
     <div className="menu-item">
       <Wrapper imageUrl={menuItem.imageUrl} size={menuItem.size} className="background-img" />
@@ -22,6 +30,7 @@ function MenuItem({ menuItem }: { menuItem: MenuItemProps }) {
   );
 }
 
+const MenuItem = withRouter(_MenuItem);
 export { MenuItem };
 
 interface WrapperProp {
