@@ -7,13 +7,12 @@ export interface MenuItemProps {
   imageUrl: string;
   id: number;
   linkUrl: string;
-  size?: string;
+  size?: "large";
 }
 
 function MenuItem({ menuItem }: { menuItem: MenuItemProps }) {
-  console.log("menuItem.linkUrl: ", menuItem.imageUrl);
   return (
-    <Wrapper imageUrl={menuItem.imageUrl} className="menu-item">
+    <Wrapper imageUrl={menuItem.imageUrl} size={menuItem.size} className="menu-item">
       <div className="content">
         <h1 className="title">{menuItem.title}</h1>
         <div className="subtitle">SHOW NOW</div>
@@ -30,4 +29,5 @@ interface WrapperProp {
 }
 const Wrapper = styled.div<WrapperProp>`
   background-image: url(${({ imageUrl }) => imageUrl});
+  height: ${({ size }) => size && "380px"};
 `;
