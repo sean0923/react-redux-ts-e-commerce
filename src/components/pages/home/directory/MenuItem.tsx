@@ -12,12 +12,13 @@ export interface MenuItemProps {
 
 function MenuItem({ menuItem }: { menuItem: MenuItemProps }) {
   return (
-    <Wrapper imageUrl={menuItem.imageUrl} size={menuItem.size} className="menu-item">
+    <div className="menu-item">
+      <Wrapper imageUrl={menuItem.imageUrl} size={menuItem.size} className="background-img" />
       <div className="content">
         <h1 className="title">{menuItem.title}</h1>
         <div className="subtitle">SHOW NOW</div>
       </div>
-    </Wrapper>
+    </div>
   );
 }
 
