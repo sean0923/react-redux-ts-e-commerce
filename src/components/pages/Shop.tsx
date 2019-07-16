@@ -9,7 +9,6 @@ function Shop() {
 
   return (
     <div>
-      <div>Shop</div>
       {collections.map((collection: ShopCollectionProps) => {
         return <CollectionPreview key={collection.id} {...collection} />;
       })}
