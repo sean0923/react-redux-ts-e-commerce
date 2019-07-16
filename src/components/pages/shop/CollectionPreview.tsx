@@ -1,4 +1,7 @@
 import React from 'react';
+import './collectionPreview/collection-preview.styles.scss';
+
+import { CollectionItem } from './collectionPreview/CollectionItem';
 
 import { ShopCollectionProps, ShopItemProps } from './shoppingData';
 
@@ -8,9 +11,11 @@ function CollectionPreview({ title, routeName, items }: ShopCollectionProps) {
       <h1 className="title">{title}</h1>
 
       <div className="preview">
-        {items.map((item: ShopItemProps) => {
-          return <div key={item.id}>{item.name}</div>;
-        })}
+        {items
+          .filter((item, idx) => idx < 4)
+          .map((item: ShopItemProps) => {
+            return <CollectionItem key={item.id} {...item} />;
+          })}
       </div>
     </div>
   );
