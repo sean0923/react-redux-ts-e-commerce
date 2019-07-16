@@ -8,7 +8,7 @@ interface FormInputProps {
   value?: string;
   name?: string;
   type?: string;
-  onChange(e: InputType): void;
+  onChange?(e: InputType): void;
 }
 
 function FormInput({ label, ...rest }: FormInputProps) {
@@ -33,6 +33,8 @@ const shrinkLabel = `
 `;
 
 const Wrapper = styled.div`
+  
+
   --color-sub: grey;
   --color-main: black;
   /* --color-sub: grey; */

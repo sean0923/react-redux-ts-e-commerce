@@ -1,6 +1,8 @@
 import React, { FormEvent } from 'react';
+import styled from 'styled-components';
 
 import { FormInput } from '../../common/FormInput';
+import { CustomButton } from '../../common/CustomButton';
 
 type InputType = React.ChangeEvent<HTMLInputElement>;
 
@@ -16,7 +18,7 @@ function SignIn() {
   };
 
   return (
-    <div className="sign-in">
+    <Wrapper className="sign-in">
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
 
@@ -39,10 +41,17 @@ function SignIn() {
             setPassword(e.target.value);
           }}
         />
-        <input type="submit" value="Submit Form" />
+        <CustomButton type="submit">Submit Form</CustomButton>
       </form>
-    </div>
+    </Wrapper>
   );
 }
 
 export { SignIn };
+
+const Wrapper = styled.div`
+  width: 30vw;
+
+  display: flex;
+  flex-direction: column;
+`;
