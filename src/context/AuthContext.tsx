@@ -1,15 +1,18 @@
 import React from 'react';
-import { firebase, auth, signInWithGoogle } from '../firebase/firebase';
+import { firebase, auth, signInWithGoogle, firestore } from '../firebase/firebase';
 
 interface AuthProps {
-  authState: null | firebase.User;
+  authState: firebase.UserInfo | null;
   toggleAuthState: () => void;
 }
 
-const AuthContext = React.createContext<AuthProps>({ authState: null, toggleAuthState: () => {} });
+const AuthContext = React.createContext<AuthProps>({
+  authState: null,
+  toggleAuthState: () => {},
+});
 
 function AuthProvider({ children }: { children: JSX.Element[] | JSX.Element }) {
-  const [authState, setAuthState] = React.useState<null | firebase.User>(null);
+  const [authState, setAuthState] = React.useState<firebase.UserInfo | null>(null);
 
   const toggleAuthState = () => {
     if (authState) {
@@ -21,8 +24,9 @@ function AuthProvider({ children }: { children: JSX.Element[] | JSX.Element }) {
 
   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authState) => {
-      console.log('authState: ', authState);
-      setAuthState(authState);
+      if (authState) {
+        setAuthState(authState);
+      }
     });
 
     return unsubscribe;
