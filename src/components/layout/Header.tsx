@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
+import { AuthContext } from '../../context/AuthContext';
+
 function Header() {
+  const { authState, toggleAuthState } = React.useContext(AuthContext);
+
   return (
     <Wrapper>
       <div className="header">
@@ -17,6 +21,9 @@ function Header() {
           </Link>
           <Link className="option" to="/contact">
             Contact
+          </Link>
+          <Link className="option" to="/contact" onClick={toggleAuthState}>
+            {authState ? 'Sign Out' : 'Sign In '}
           </Link>
         </div>
       </div>
