@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { FormInput } from '../../common/FormInput';
 import { CustomButton } from '../../common/CustomButton';
 
+import { signInWithGoogle } from '../../../firebase/firebase';
+
 type InputType = React.ChangeEvent<HTMLInputElement>;
 
 function SignIn() {
@@ -42,6 +44,9 @@ function SignIn() {
           }}
         />
         <CustomButton type="submit">Submit Form</CustomButton>
+        <CustomButton onClick={signInWithGoogle} type="button">
+          Sign In With Google
+        </CustomButton>
       </form>
     </Wrapper>
   );

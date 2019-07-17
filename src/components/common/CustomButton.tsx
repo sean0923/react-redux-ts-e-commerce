@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface CustomButtonProps {
   type?: 'button' | 'submit';
+  onClick?(): void;
   children: React.ReactChildren | string;
 }
 
