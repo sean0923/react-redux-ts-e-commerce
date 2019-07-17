@@ -4,13 +4,20 @@ import styled from 'styled-components';
 interface CustomButtonProps {
   type?: 'button' | 'submit';
   onClick?(): void;
+  isGoogleSignIn?: boolean;
   children: React.ReactChildren | string;
 }
 
 function CustomButton({ children, ...rest }: CustomButtonProps) {
+  let className = 'custom-button';
+
+  if (rest.isGoogleSignIn) {
+    className += ' ' + 'google-sign-in';
+  }
+
   return (
     <Wrapper>
-      <button className="custom-button" {...rest}>
+      <button className={className} {...rest}>
         {children}
       </button>
     </Wrapper>
@@ -18,12 +25,6 @@ function CustomButton({ children, ...rest }: CustomButtonProps) {
 }
 
 export { CustomButton };
-
-const shrinkLabel = `
-  top: -14px;
-  font-size: 12px;
-  color: var(--color-main);
-`;
 
 const Wrapper = styled.div`
   .custom-button {
@@ -46,6 +47,16 @@ const Wrapper = styled.div`
       background-color: white;
       color: black;
       border: 1px solid black;
+    }
+
+    &.google-sign-in {
+      background-color: #4285f4;
+      color: white;
+
+      &:hover {
+        background-color: #357ae8;
+        border: none;
+      }
     }
   }
 `;

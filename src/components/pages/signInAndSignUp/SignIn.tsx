@@ -43,10 +43,12 @@ function SignIn() {
             setPassword(e.target.value);
           }}
         />
-        <CustomButton type="submit">Submit Form</CustomButton>
-        <CustomButton onClick={signInWithGoogle} type="button">
-          Sign In With Google
-        </CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit">Submit Form</CustomButton>
+          <CustomButton onClick={signInWithGoogle} type="button" isGoogleSignIn>
+            Sign In With Google
+          </CustomButton>
+        </div>
       </form>
     </Wrapper>
   );
@@ -55,8 +57,17 @@ function SignIn() {
 export { SignIn };
 
 const Wrapper = styled.div`
-  width: 30vw;
+  width: 380px;
 
   display: flex;
   flex-direction: column;
+
+  .title {
+    margin: 10px 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
