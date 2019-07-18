@@ -12,7 +12,7 @@ function CustomButton({ children, ...rest }: CustomButtonProps) {
   let className = 'custom-button';
 
   if (rest.isGoogleSignIn) {
-    className += ' ' + 'google-sign-in';
+    className += ' google-sign-in';
   }
 
   return (
