@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { firebase, createUserThenGetUserRef } from '../firebase/firebase';
-import { useFirebaseAuth } from '../hooks/useFirebaseAuth';
 
-interface ValidCurrUserProps extends firebase.UserInfo {
+import { AuthContext } from './AuthContext';
+
+interface ValidCurrUserProps extends firebase.User {
   id?: string;
 }
 
@@ -13,16 +14,16 @@ type FirebaseDocRef = firebase.firestore.DocumentReference;
 
 interface CurrUserContextProps {
   currUser: CurrUserProps;
-  toggleSignInStatus(): void;
+  setCurrUser: Function;
 }
+
 const CurrUserContext = React.createContext<CurrUserContextProps>({
   currUser: null,
-  toggleSignInStatus: () => {},
+  setCurrUser: () => {},
 });
 
 function CurrUserProvider({ children }: { children: JSX.Element[] | JSX.Element }) {
-  const { authPropsFromFirebase, toggleSignInStatus } = useFirebaseAuth();
-
+  const { authPropsFromFirebase } = React.useContext(AuthContext);
   const [currUser, setCurrUser] = React.useState<CurrUserProps>(null);
 
   React.useEffect(() => {
@@ -49,7 +50,7 @@ function CurrUserProvider({ children }: { children: JSX.Element[] | JSX.Element 
   }, [authPropsFromFirebase]);
 
   return (
-    <CurrUserContext.Provider value={{ currUser, toggleSignInStatus }}>
+    <CurrUserContext.Provider value={{ currUser, setCurrUser }}>
       {children}
     </CurrUserContext.Provider>
   );

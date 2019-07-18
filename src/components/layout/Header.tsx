@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { auth } from '../../firebase/firebase';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import { CurrUserContext } from '../../context/CurrUserContext';
 
 function Header() {
-  const { currUser, toggleSignInStatus } = React.useContext(CurrUserContext);
+  const { currUser } = React.useContext(CurrUserContext);
 
   return (
     <Wrapper>
@@ -22,7 +23,15 @@ function Header() {
           <Link className="option" to="/contact">
             Contact
           </Link>
-          <Link className="option" to="/" onClick={toggleSignInStatus}>
+          <Link
+            className="option"
+            to="/sign-in-and-sign-up"
+            onClick={() => {
+              if (currUser) {
+                auth.signOut();
+              }
+            }}
+          >
             {currUser ? 'Sign Out' : 'Sign In '}
           </Link>
         </div>

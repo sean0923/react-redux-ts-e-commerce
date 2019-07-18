@@ -30,7 +30,8 @@ function SignUp() {
     }
 
     try {
-      const { user } = await auth.signInWithEmailAndPassword(email, password);
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
       if (user) {
         createUserThenGetUserRef(user, { displayName });
         resetForm();
@@ -41,7 +42,7 @@ function SignUp() {
   };
 
   return (
-    <Wrapper className="sign-up">
+    <Wrapper>
       <h2 className="title">I already have an account</h2>
       <span>Sign in with your email and password</span>
 
@@ -61,7 +62,7 @@ function SignUp() {
           type="email"
           value={email}
           onChange={(e: InputType) => {
-            setPassword(e.target.value);
+            setEmail(e.target.value);
           }}
         />
         <FormInput
@@ -76,17 +77,14 @@ function SignUp() {
         <FormInput
           label="Confirm Password"
           name="confirmPassword"
-          type="confirmPassword"
+          type="password"
           value={confirmPassword}
           onChange={(e: InputType) => {
-            setPassword(e.target.value);
+            setConfirmPassword(e.target.value);
           }}
         />
         <div className="buttons">
           <CustomButton type="submit">Sign Up</CustomButton>
-          {/* <CustomButton onClick={signInWithGoogle} type="button" isGoogleSignIn>
-            Sign In With Google
-          </CustomButton> */}
         </div>
       </form>
     </Wrapper>
@@ -96,13 +94,11 @@ function SignUp() {
 export { SignUp };
 
 const Wrapper = styled.div`
-  .sign-up {
-    display: flex;
-    flex-direction: column;
-    width: 380px;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
 
-    .title {
-      margin: 10px 0;
-    }
+  .title {
+    margin: 10px 0;
   }
 `;

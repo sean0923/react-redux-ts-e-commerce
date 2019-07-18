@@ -9,19 +9,22 @@ import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
 import { SignInAndSignUp } from './pages/SignInAndSignUp';
 
+import { AuthProvider } from '../context/AuthContext';
 import { CurrUserProvider } from '../context/CurrUserContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <CurrUserProvider>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/shop" component={Shop} />
-          <Route path="/sign-in-and-sign-up" component={SignInAndSignUp} />
-        </Switch>
-      </CurrUserProvider>
+      <AuthProvider>
+        <CurrUserProvider>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/shop" component={Shop} />
+            <Route path="/sign-in-and-sign-up" component={SignInAndSignUp} />
+          </Switch>
+        </CurrUserProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
