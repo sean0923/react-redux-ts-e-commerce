@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-import { AuthContext } from '../../context/AuthContext';
+import { CurrUserContext } from '../../context/CurrUserContext';
 
 function Header() {
-  const { authState, toggleAuthState } = React.useContext(AuthContext);
+  const { currUser, toggleSignInStatus } = React.useContext(CurrUserContext);
 
   return (
     <Wrapper>
@@ -22,8 +22,8 @@ function Header() {
           <Link className="option" to="/contact">
             Contact
           </Link>
-          <Link className="option" to="/contact" onClick={toggleAuthState}>
-            {authState ? 'Sign Out' : 'Sign In '}
+          <Link className="option" to="/" onClick={toggleSignInStatus}>
+            {currUser ? 'Sign Out' : 'Sign In '}
           </Link>
         </div>
       </div>
