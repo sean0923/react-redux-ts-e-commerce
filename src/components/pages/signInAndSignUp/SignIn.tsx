@@ -21,7 +21,7 @@ function SignIn() {
 
   return (
     <Wrapper className="sign-in">
-      <h2>I already have an account</h2>
+      <h2 className="title">I already have an account</h2>
       <span>Sign in with your email and password</span>
 
       <form onSubmit={handleSubmit}>

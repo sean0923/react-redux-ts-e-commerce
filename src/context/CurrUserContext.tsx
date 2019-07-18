@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { firebase, firestore } from '../firebase/firebase';
+import { firebase, createUserThenGetUserRef } from '../firebase/firebase';
 import { useFirebaseAuth } from '../hooks/useFirebaseAuth';
 
 interface ValidCurrUserProps extends firebase.UserInfo {
@@ -56,29 +56,3 @@ function CurrUserProvider({ children }: { children: JSX.Element[] | JSX.Element 
 }
 
 export { CurrUserProvider, CurrUserContext };
-
-const createUserThenGetUserRef: (
-  authPropsFromFirebase: firebase.UserInfo
-) => Promise<FirebaseDocRef | undefined> = async (authPropsFromFirebase) => {
-  if (!authPropsFromFirebase) {
-    return;
-  }
-
-  const userRef = firestore.doc(`users/${authPropsFromFirebase.uid}`);
-  const snapshot = await userRef.get();
-
-  const noUserInDB = !snapshot.exists;
-
-  if (noUserInDB) {
-    const { displayName, email } = authPropsFromFirebase;
-    const createdAt = new Date();
-
-    try {
-      userRef.set({ displayName, email, createdAt });
-    } catch (error) {
-      console.error('error creating user', error.message);
-    }
-  }
-
-  return userRef;
-};

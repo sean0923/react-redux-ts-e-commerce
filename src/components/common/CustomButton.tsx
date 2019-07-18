@@ -8,10 +8,10 @@ interface CustomButtonProps {
   children: React.ReactChildren | string;
 }
 
-function CustomButton({ children, ...rest }: CustomButtonProps) {
+function CustomButton({ children, isGoogleSignIn, ...rest }: CustomButtonProps) {
   let className = 'custom-button';
 
-  if (rest.isGoogleSignIn) {
+  if (isGoogleSignIn) {
     className += ' google-sign-in';
   }
 
