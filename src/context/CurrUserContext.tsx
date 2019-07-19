@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { firebase, createUserThenGetUserRef } from '../firebase/firebase';
+import { firebase, firestore } from '../firebase/firebase';
 
 import { AuthContext } from './AuthContext';
 
@@ -9,8 +9,6 @@ interface ValidCurrUserProps extends firebase.User {
 }
 
 type CurrUserProps = ValidCurrUserProps | null;
-
-type FirebaseDocRef = firebase.firestore.DocumentReference;
 
 interface CurrUserContextProps {
   currUser: CurrUserProps;
@@ -27,25 +25,18 @@ function CurrUserProvider({ children }: { children: JSX.Element[] | JSX.Element 
   const [currUser, setCurrUser] = React.useState<CurrUserProps>(null);
 
   React.useEffect(() => {
-    let unsubscribe: null | Function = null;
-
     if (authPropsFromFirebase) {
-      createUserThenGetUserRef(authPropsFromFirebase).then(
-        (userRef: FirebaseDocRef | undefined) => {
-          if (userRef) {
-            unsubscribe = userRef.onSnapshot((snapshot) => {
-              const validData = snapshot.data() as ValidCurrUserProps;
-              setCurrUser({ id: snapshot.id, ...validData });
-            });
+      const unsubscribe = firestore
+        .doc(`users/${authPropsFromFirebase.uid}`)
+        .onSnapshot((snapshot) => {
+          if (snapshot.exists) {
+            setCurrUser({ id: snapshot.id, ...(snapshot.data() as ValidCurrUserProps) });
           }
-        }
-      );
+        });
+
+      return unsubscribe;
     } else {
       setCurrUser(null);
-    }
-
-    if (unsubscribe) {
-      return unsubscribe;
     }
   }, [authPropsFromFirebase]);
 

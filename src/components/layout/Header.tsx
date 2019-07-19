@@ -5,10 +5,10 @@ import { auth } from '../../firebase/firebase';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-import { CurrUserContext } from '../../context/CurrUserContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function Header() {
-  const { currUser } = React.useContext(CurrUserContext);
+  const { authPropsFromFirebase } = React.useContext(AuthContext);
 
   return (
     <Wrapper>
@@ -27,12 +27,12 @@ function Header() {
             className="option"
             to="/sign-in-and-sign-up"
             onClick={() => {
-              if (currUser) {
+              if (authPropsFromFirebase) {
                 auth.signOut();
               }
             }}
           >
-            {currUser ? 'Sign Out' : 'Sign In '}
+            {authPropsFromFirebase ? 'Sign Out' : 'Sign In '}
           </Link>
         </div>
       </div>

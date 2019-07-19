@@ -23,13 +23,16 @@ function SignIn() {
     const { user } = await auth.signInWithEmailAndPassword(email, password);
 
     try {
-      
+      if (user) {
+      }
     } catch (error) {
       console.error(error);
     }
 
     resetForm();
   };
+
+  
 
   return (
     <Wrapper>

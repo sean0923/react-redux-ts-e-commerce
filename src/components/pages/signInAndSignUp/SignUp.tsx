@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FormInput } from '../../common/FormInput';
 import { CustomButton } from '../../common/CustomButton';
 
-import { auth, createUserThenGetUserRef } from '../../../firebase/firebase';
+import { auth, noUserInDbThenCreateUser } from '../../../firebase/firebase';
 
 type InputType = React.ChangeEvent<HTMLInputElement>;
 
@@ -33,7 +33,7 @@ function SignUp() {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
       if (user) {
-        createUserThenGetUserRef(user, { displayName });
+        await noUserInDbThenCreateUser({ ...user, displayName });
         resetForm();
       }
     } catch (error) {
@@ -50,7 +50,7 @@ function SignUp() {
         <FormInput
           label="Display Name"
           name="displayName"
-          type="displayName"
+          type="text"
           value={displayName}
           onChange={(e: InputType) => {
             setDisplayName(e.target.value);
