@@ -7,9 +7,12 @@ export interface UpdateUserAction {
   payload: UserReducerProps;
 }
 
-export const updateUser = (currUser: string): UpdateUserAction => {
+export const updateUser = (currUser: UserReducerProps): UpdateUserAction => {
   return {
     type: ActionTypes.UPDATE_USER,
     payload: currUser,
   };
 };
+
+// const res: UserReducerProps = 'a';
+// const res: number = 'a';

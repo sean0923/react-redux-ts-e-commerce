@@ -34,3 +34,13 @@
 // )(_useCurrUser);
 
 // export { useCurrUser };
+
+let res: {} = 'a';
+res = null;
+res = undefined;
+res = 'undefined';
+
+// let res: number = 1;
+// res = null;
+// res = undefined;
+// res = 'a';
