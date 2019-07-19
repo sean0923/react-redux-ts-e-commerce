@@ -23,6 +23,7 @@ const CurrUserContext = React.createContext<CurrUserContextProps>({
 function CurrUserProvider({ children }: { children: JSX.Element[] | JSX.Element }) {
   const { authPropsFromFirebase } = React.useContext(AuthContext);
   const [currUser, setCurrUser] = React.useState<CurrUserProps>(null);
+  console.log('currUser: ', currUser);
 
   React.useEffect(() => {
     if (authPropsFromFirebase) {
