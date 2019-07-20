@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { ShoppingCartIcon } from './header/ShoppingCartIcon';
+import { ShoppingCardDropdown } from './header/ShoppingCardDropdown';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -34,7 +36,9 @@ function Header() {
           >
             {authPropsFromFirebase ? 'Sign Out' : 'Sign In '}
           </Link>
+          <ShoppingCartIcon />
         </div>
+        <ShoppingCardDropdown />
       </div>
     </Wrapper>
   );

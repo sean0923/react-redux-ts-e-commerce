@@ -1,7 +1,7 @@
 import { UpdateUserAction } from './userActions';
 
-export enum ActionTypes {
+export enum UserActionTypes {
   UPDATE_USER = 'UPDATE_USER',
 }
 
-export type Action = UpdateUserAction;
+export type UserAction = UpdateUserAction;

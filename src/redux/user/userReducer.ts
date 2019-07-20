@@ -1,4 +1,4 @@
-import { Action, ActionTypes } from '../actions/rootActions';
+import { UserAction, UserActionTypes } from '../rootActions';
 import { firebase } from '../../firebase/firebase';
 
 export interface UserReducerProps extends firebase.User {
@@ -7,10 +7,10 @@ export interface UserReducerProps extends firebase.User {
 
 export const userReducer = (
   state: UserReducerProps = {} as UserReducerProps,
-  action: Action
+  action: UserAction
 ): UserReducerProps => {
   switch (action.type) {
-    case ActionTypes.UPDATE_USER:
+    case UserActionTypes.UPDATE_USER:
       return {
         ...state,
         ...action.payload,

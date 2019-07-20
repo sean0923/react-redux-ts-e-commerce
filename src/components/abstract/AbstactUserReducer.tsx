@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { firebase, firestore } from '../../firebase/firebase';
 import { AuthContext } from '../../context/AuthContext';
 
-import { updateUser } from '../../redux/actions/rootActions';
+import { updateUser } from '../../redux/rootActions';
 
-import { UserReducerProps } from '../../redux/reducers/userReducer';
+import { UserReducerProps } from '../../redux/user/userReducer';
 
 interface ValidCurrUserProps extends firebase.User {
   id?: string;
