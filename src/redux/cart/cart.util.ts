@@ -5,16 +5,18 @@ export const getCartItemsWithCount = (
   cartItems: CartItemProps[],
   newItem: ShopItemProps
 ): CartItemProps[] => {
-  const idxOfFoundItem = cartItems.findIndex((cartItem) => cartItem.id === newItem.id);
-  const isFirstItem = idxOfFoundItem === -1;
+  const isItemExist = cartItems.find((cartItem) => cartItem.id === newItem.id);
+  const isFirstItem = !isItemExist;
 
   if (isFirstItem) {
     return [...cartItems, { ...newItem, count: 1 }];
   }
 
-  return [
-    ...cartItems.slice(0, idxOfFoundItem),
-    { ...cartItems[idxOfFoundItem], count: cartItems[idxOfFoundItem].count + 1 },
-    ...cartItems.slice(idxOfFoundItem + 1),
-  ];
+  return cartItems.map((cartItem) => {
+    if (cartItem.id === newItem.id) {
+      return { ...cartItem, count: cartItem.count + 1 };
+    }
+
+    return cartItem;
+  });
 };
