@@ -7,6 +7,7 @@ import { RootReducerProp } from '../../../redux/rootReducer';
 import { ReactComponent as ShoppingBagSvg } from '../../../assets/shopping-cart.svg';
 
 import { toggleIsCartHidden } from '../../../redux/rootActions';
+import { selectCartItemsCount } from '../../../redux/cart/cart.selector';
 
 interface _ShoppingCartIconProps {
   toggleIsCartHidden: typeof toggleIsCartHidden;
@@ -23,10 +24,14 @@ function _ShoppingCartIcon({ toggleIsCartHidden, itemCount }: _ShoppingCartIconP
 }
 
 const mapStateToProps = (state: RootReducerProp) => {
+  console.log('I am being called');
+  // return {
+  //   itemCount: state.cartReduccer.cartItems.reduce((acc, cartItem) => {
+  //     return (acc += cartItem.count);
+  //   }, 0),
+  // };
   return {
-    itemCount: state.cartReduccer.cartItems.reduce((acc, cartItem) => {
-      return (acc += cartItem.count);
-    }, 0),
+    itemCount: selectCartItemsCount(state),
   };
 };
 
