@@ -24,12 +24,6 @@ function _ShoppingCartIcon({ toggleIsCartHidden, itemCount }: _ShoppingCartIconP
 }
 
 const mapStateToProps = (state: RootReducerProp) => {
-  console.log('I am being called');
-  // return {
-  //   itemCount: state.cartReduccer.cartItems.reduce((acc, cartItem) => {
-  //     return (acc += cartItem.count);
-  //   }, 0),
-  // };
   return {
     itemCount: selectCartItemsCount(state),
   };

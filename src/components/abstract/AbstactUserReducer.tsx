@@ -37,7 +37,7 @@ function _AbstactUserReducer({ updateUser, children }: _AbstactUserReducerProps)
     } else {
       updateUser({} as UserReducerProps);
     }
-  }, [authPropsFromFirebase]);
+  }, [authPropsFromFirebase, updateUser]);
 
   return <div>{children}</div>;
 }

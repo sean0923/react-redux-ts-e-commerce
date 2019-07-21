@@ -21,7 +21,7 @@ function _ShoppingCartDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
     <Wrapper>
       <div className="cart-items">
         {cartReducer.cartItems.map((cartItem) => {
-          return <ShoppingCartItem cartItem={cartItem} />;
+          return <ShoppingCartItem key={cartItem.id} cartItem={cartItem} />;
         })}
       </div>
 
