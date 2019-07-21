@@ -2,25 +2,36 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
+import { RootReducerProp } from '../../../redux/rootReducer';
+
 import { ReactComponent as ShoppingBagSvg } from '../../../assets/shopping-cart.svg';
 
 import { toggleIsCartHidden } from '../../../redux/rootActions';
 
 interface _ShoppingCartIconProps {
   toggleIsCartHidden: typeof toggleIsCartHidden;
+  itemCount: number;
 }
 
-function _ShoppingCartIcon({ toggleIsCartHidden }: _ShoppingCartIconProps) {
+function _ShoppingCartIcon({ toggleIsCartHidden, itemCount }: _ShoppingCartIconProps) {
   return (
     <Wrapper onClick={toggleIsCartHidden}>
       <ShoppingBagSvg className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{itemCount}</span>
     </Wrapper>
   );
 }
 
+const mapStateToProps = (state: RootReducerProp) => {
+  return {
+    itemCount: state.cartReduccer.cartItems.reduce((acc, cartItem) => {
+      return (acc += cartItem.count);
+    }, 0),
+  };
+};
+
 const ShoppingCartIcon = connect(
-  null,
+  mapStateToProps,
   { toggleIsCartHidden }
 )(_ShoppingCartIcon);
 
