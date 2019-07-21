@@ -19,9 +19,11 @@ function _ShoppingCartDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
 
   return (
     <Wrapper>
-      {cartReducer.cartItems.map((cartItem) => {
-        return <ShoppingCartItem cartItem={cartItem} />;
-      })}
+      <div className="cart-items">
+        {cartReducer.cartItems.map((cartItem) => {
+          return <ShoppingCartItem cartItem={cartItem} />;
+        })}
+      </div>
 
       <CustomButton>Go To Checkout</CustomButton>
     </Wrapper>
@@ -55,7 +57,7 @@ const Wrapper = styled.div`
     height: 240px;
     display: flex;
     flex-direction: column;
-    /* overflow: scroll; */
+    overflow-y: scroll;
   }
 
   button {
