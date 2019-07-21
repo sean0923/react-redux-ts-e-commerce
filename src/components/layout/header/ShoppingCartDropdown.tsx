@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
+import { ShoppingCartItem } from './shoppingCartDropdown/ShoppingCartItem';
 import { CustomButton } from '../../common/CustomButton';
+
 import { RootReducerProp } from '../../../redux/rootReducer';
 import { CartReducerProps } from '../../../redux/cart/cartReducer';
 
@@ -10,14 +12,17 @@ interface _ShoppingCardDropdownProps {
   cartReducer: CartReducerProps;
 }
 
-function _ShoppingCardDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
+function _ShoppingCartDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
   if (cartReducer.isHidden) {
     return null;
   }
 
   return (
     <Wrapper>
-      <div className="cart-items" />
+      {cartReducer.cartItems.map((cartItem) => {
+        return <ShoppingCartItem cartItem={cartItem} />;
+      })}
+
       <CustomButton>Go To Checkout</CustomButton>
     </Wrapper>
   );
@@ -29,9 +34,9 @@ const mapStateToProps = (state: RootReducerProp) => {
   };
 };
 
-const ShoppingCardDropdown = connect(mapStateToProps)(_ShoppingCardDropdown);
+const ShoppingCartDropdown = connect(mapStateToProps)(_ShoppingCartDropdown);
 
-export { ShoppingCardDropdown };
+export { ShoppingCartDropdown };
 
 const Wrapper = styled.div`
   position: absolute;

@@ -5,7 +5,7 @@ import { auth } from '../../firebase/firebase';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { ShoppingCartIcon } from './header/ShoppingCartIcon';
-import { ShoppingCardDropdown } from './header/ShoppingCardDropdown';
+import { ShoppingCartDropdown } from './header/ShoppingCartDropdown';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -38,7 +38,7 @@ function Header() {
           </Link>
           <ShoppingCartIcon />
         </div>
-        <ShoppingCardDropdown />
+        <ShoppingCartDropdown />
       </div>
     </Wrapper>
   );
