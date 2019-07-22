@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { ShoppingCartItem } from './shoppingCartDropdown/ShoppingCartItem';
 import { CustomButton } from '../../common/CustomButton';
@@ -9,11 +10,11 @@ import { RootReducerProp } from '../../../redux/rootReducer';
 import { selectCartItems } from '../../../redux/cart/cart.selector';
 import { CartItemProps } from '../../../redux/cart/cartReducer';
 
-interface ShoppingCardDropdownProps {
+interface ShoppingCardDropdownProps extends RouteComponentProps {
   cartItems: CartItemProps[];
 }
 
-function _ShoppingCartDropdown({ cartItems }: ShoppingCardDropdownProps) {
+function _ShoppingCartDropdown({ cartItems, history }: ShoppingCardDropdownProps) {
   console.log('cartItems.length: ', cartItems.length);
   return (
     <Wrapper>
@@ -27,7 +28,7 @@ function _ShoppingCartDropdown({ cartItems }: ShoppingCardDropdownProps) {
         )}
       </div>
 
-      <CustomButton>Go To Checkout</CustomButton>
+      <CustomButton onClick={() => history.push('/checkout')}>Go To Checkout</CustomButton>
     </Wrapper>
   );
 }
@@ -38,7 +39,7 @@ const mapStateToProps = (state: RootReducerProp) => {
   };
 };
 
-const ShoppingCartDropdown = connect(mapStateToProps)(_ShoppingCartDropdown);
+const ShoppingCartDropdown = withRouter(connect(mapStateToProps)(_ShoppingCartDropdown) as any);
 
 export { ShoppingCartDropdown };
 
