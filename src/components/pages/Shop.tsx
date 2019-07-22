@@ -14,7 +14,6 @@ interface _ShopProps {
 }
 
 function _Shop({ userReducer }: _ShopProps) {
-  console.log('userReducer: ', userReducer);
   const [collections] = React.useState(SHOP_DATA);
 
   return (

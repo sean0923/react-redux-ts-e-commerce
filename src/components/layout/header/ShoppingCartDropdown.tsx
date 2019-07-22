@@ -6,21 +6,18 @@ import { ShoppingCartItem } from './shoppingCartDropdown/ShoppingCartItem';
 import { CustomButton } from '../../common/CustomButton';
 
 import { RootReducerProp } from '../../../redux/rootReducer';
-import { CartReducerProps } from '../../../redux/cart/cartReducer';
+import { selectCartItems } from '../../../redux/cart/cart.selector';
+import { CartItemProps } from '../../../redux/cart/cartReducer';
 
-interface _ShoppingCardDropdownProps {
-  cartReducer: CartReducerProps;
+interface ShoppingCardDropdownProps {
+  cartItems: CartItemProps[];
 }
 
-function _ShoppingCartDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
-  if (cartReducer.isHidden) {
-    return null;
-  }
-
+function _ShoppingCartDropdown({ cartItems }: ShoppingCardDropdownProps) {
   return (
     <Wrapper>
       <div className="cart-items">
-        {cartReducer.cartItems.map((cartItem) => {
+        {cartItems.map((cartItem) => {
           return <ShoppingCartItem key={cartItem.id} cartItem={cartItem} />;
         })}
       </div>
@@ -32,7 +29,7 @@ function _ShoppingCartDropdown({ cartReducer }: _ShoppingCardDropdownProps) {
 
 const mapStateToProps = (state: RootReducerProp) => {
   return {
-    cartReducer: state.cartReduccer,
+    cartItems: selectCartItems(state),
   };
 };
 

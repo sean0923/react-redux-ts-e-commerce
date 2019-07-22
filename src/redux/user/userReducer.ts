@@ -1,7 +1,7 @@
 import { UserAction, UserActionTypes } from '../rootActions';
 import { firebase } from '../../firebase/firebase';
 
-export interface UserReducerProps extends firebase.User {
+export interface UserReducerProps extends firebase.UserInfo {
   id?: string;
 }
 

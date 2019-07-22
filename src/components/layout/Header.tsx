@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { auth } from '../../firebase/firebase';
+
+import { RootReducerProp } from '../../redux/rootReducer';
+import { selectCartIsHidden } from '../../redux/cart/cart.selector';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { ShoppingCartIcon } from './header/ShoppingCartIcon';
@@ -9,7 +14,11 @@ import { ShoppingCartDropdown } from './header/ShoppingCartDropdown';
 
 import { AuthContext } from '../../context/AuthContext';
 
-function Header() {
+interface HeaderProos {
+  isHidden: boolean;
+}
+
+function _Header({ isHidden }: HeaderProos) {
   const { authPropsFromFirebase } = React.useContext(AuthContext);
 
   return (
@@ -38,11 +47,19 @@ function Header() {
           </Link>
           <ShoppingCartIcon />
         </div>
-        <ShoppingCartDropdown />
+        {isHidden ? null : <ShoppingCartDropdown />}
       </div>
     </Wrapper>
   );
 }
+
+const mapStateToProps = (state: RootReducerProp) => {
+  return {
+    isHidden: selectCartIsHidden(state),
+  };
+};
+
+const Header = connect(mapStateToProps)(_Header);
 
 export { Header };
 
