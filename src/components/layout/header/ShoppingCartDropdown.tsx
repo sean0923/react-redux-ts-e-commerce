@@ -14,12 +14,17 @@ interface ShoppingCardDropdownProps {
 }
 
 function _ShoppingCartDropdown({ cartItems }: ShoppingCardDropdownProps) {
+  console.log('cartItems.length: ', cartItems.length);
   return (
     <Wrapper>
       <div className="cart-items">
-        {cartItems.map((cartItem) => {
-          return <ShoppingCartItem key={cartItem.id} cartItem={cartItem} />;
-        })}
+        {cartItems.length === 0 ? (
+          <span className="empty-message">Your cart is empty</span>
+        ) : (
+          cartItems.map((cartItem) => {
+            return <ShoppingCartItem key={cartItem.id} cartItem={cartItem} />;
+          })
+        )}
       </div>
 
       <CustomButton>Go To Checkout</CustomButton>
@@ -55,6 +60,11 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+
+    .empty-message {
+      font-size: 18px;
+      margin: 50px auto;
+    }
   }
 
   button {
