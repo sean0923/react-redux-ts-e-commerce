@@ -10,12 +10,14 @@ import { RootReducerProp } from '../../../redux/rootReducer';
 import { selectCartItems } from '../../../redux/cart/cart.selector';
 import { CartItemProps } from '../../../redux/cart/cartReducer';
 
+import { toggleIsCartHidden } from '../../../redux/rootActions';
+
 interface ShoppingCardDropdownProps extends RouteComponentProps {
   cartItems: CartItemProps[];
+  dispatch: Function;
 }
 
-function _ShoppingCartDropdown({ cartItems, history }: ShoppingCardDropdownProps) {
-  console.log('cartItems.length: ', cartItems.length);
+function _ShoppingCartDropdown({ cartItems, history, dispatch }: ShoppingCardDropdownProps) {
   return (
     <Wrapper>
       <div className="cart-items">
@@ -28,7 +30,14 @@ function _ShoppingCartDropdown({ cartItems, history }: ShoppingCardDropdownProps
         )}
       </div>
 
-      <CustomButton onClick={() => history.push('/checkout')}>Go To Checkout</CustomButton>
+      <CustomButton
+        onClick={() => {
+          dispatch(toggleIsCartHidden());
+          history.push('/checkout');
+        }}
+      >
+        Go To Checkout
+      </CustomButton>
     </Wrapper>
   );
 }

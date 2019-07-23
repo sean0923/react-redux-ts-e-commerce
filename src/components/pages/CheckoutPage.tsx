@@ -1,7 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-function CheckoutPage() {
+import { CheckoutItem } from './checkoutPage/CheckoutItem';
+
+import { RootReducerProp } from '../../redux/rootReducer';
+import { CartItemProps } from '../../redux/cart/cartReducer';
+
+import { selectTotalCost, selectCartItems } from '../../redux/cart/cart.selector';
+
+interface CheckoutPageProps {
+  totalCost: number;
+  cartItems: CartItemProps[];
+}
+
+function _CheckoutPage({ totalCost, cartItems }: CheckoutPageProps) {
+  console.log('totalCost: ', totalCost);
   return (
     <Wrapper>
       <div>
@@ -23,15 +37,27 @@ function CheckoutPage() {
               <span>Remove</span>
             </div>
           </div>
-        </div>
+          {cartItems.map((cartItem) => {
+            return <CheckoutItem key={cartItem.id} cartItem={cartItem} />;
+          })}
 
-        <div className="total">
-          <span>TOTAL: </span>
+          <div className="total">
+            <span>{`TOTAL: $${totalCost}`}</span>
+          </div>
         </div>
       </div>
     </Wrapper>
   );
 }
+
+const mapStateToProps = (state: RootReducerProp) => {
+  return {
+    cartItems: selectCartItems(state),
+    totalCost: selectTotalCost(state),
+  };
+};
+
+const CheckoutPage = connect(mapStateToProps)(_CheckoutPage);
 
 export { CheckoutPage };
 

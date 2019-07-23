@@ -14,11 +14,20 @@ export const selectCartIsHidden = createSelector(
   (cart) => cart.isHidden
 );
 
-export const selectCartItemsCount = createSelector(
+export const selectCartItemsTotalCount = createSelector(
   [selectCartItems],
-  (cartItmes) => {
-    return cartItmes.reduce((acc, cartItem) => {
+  (cartItems) => {
+    return cartItems.reduce((acc, cartItem) => {
       return (acc += cartItem.count);
+    }, 0);
+  }
+);
+
+export const selectTotalCost = createSelector(
+  [selectCartItems],
+  (cartItems) => {
+    return cartItems.reduce((acc, cartItem) => {
+      return (acc += cartItem.count * cartItem.price);
     }, 0);
   }
 );
