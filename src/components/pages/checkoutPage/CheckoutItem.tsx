@@ -19,7 +19,11 @@ function _CheckoutItem({ cartItem, dispatch }: CheckoutItemProps) {
         <img src={imageUrl} alt="item" />
       </div>
       <div className="name">{name}</div>
-      <div className="quantity">{count}</div>
+      <div className="quantity">
+        <div className="arrow">&#10094;</div>
+        <span className="value">{count}</span>
+        <div className="arrow">&#10095;</div>
+      </div>
       <div className="price">{price}</div>
       <div
         className="remove-button"
@@ -61,7 +65,15 @@ const Wrapper = styled.div`
   }
 
   .quantity {
-    padding-left: 20px;
+    display: flex;
+
+    .arrow {
+      cursor: pointer;
+    }
+
+    .value {
+      margin: 0 10px;
+    }
   }
 
   .remove-button {
