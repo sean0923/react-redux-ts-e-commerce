@@ -25,6 +25,7 @@ function _CheckoutItem({ cartItem, dispatch }: CheckoutItemProps) {
       <div className="name">{name}</div>
       <div className="quantity">
         <div
+          style={count === 0 ? { visibility: 'hidden' } : { visibility: 'visible' }}
           className="arrow"
           onClick={() => {
             dispatch(decreaseItemCountFromCart(id));
