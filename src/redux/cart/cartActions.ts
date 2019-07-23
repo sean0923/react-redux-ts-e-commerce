@@ -21,13 +21,13 @@ export const addItemToCart = (item: ShopItemProps): AddItemToCartAction => {
   };
 };
 
-export interface RemoveItemFromCartAction {
-  type: CartActionTypes.REMOVE_ITEM_FROM_CART;
+export interface ClearItemFromCartAction {
+  type: CartActionTypes.CLEAR_ITEM_FROM_CART;
   payload: number;
 }
-export const removeItemFromCart = (id: number): RemoveItemFromCartAction => {
+export const clearItemFromCart = (id: number): ClearItemFromCartAction => {
   return {
-    type: CartActionTypes.REMOVE_ITEM_FROM_CART,
+    type: CartActionTypes.CLEAR_ITEM_FROM_CART,
     payload: id,
   };
 };

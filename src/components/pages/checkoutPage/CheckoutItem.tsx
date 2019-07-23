@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { CartItemProps } from '../../../redux/cart/cartReducer';
 
-import { removeItemFromCart } from '../../../redux/rootActions';
+import { clearItemFromCart } from '../../../redux/rootActions';
 
 interface CheckoutItemProps {
   cartItem: CartItemProps;
@@ -28,7 +28,7 @@ function _CheckoutItem({ cartItem, dispatch }: CheckoutItemProps) {
       <div
         className="remove-button"
         onClick={() => {
-          dispatch(removeItemFromCart(id));
+          dispatch(clearItemFromCart(id));
         }}
       >
         &#10005;
