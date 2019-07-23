@@ -31,3 +31,14 @@ export const clearItemFromCart = (id: number): ClearItemFromCartAction => {
     payload: id,
   };
 };
+
+export interface DecreaseItemCountFromCartAction {
+  type: CartActionTypes.DECREASE_ITEM_COUNT_FROM_CART;
+  payload: number;
+}
+export const decreaseItemCountFromCart = (id: number): DecreaseItemCountFromCartAction => {
+  return {
+    type: CartActionTypes.DECREASE_ITEM_COUNT_FROM_CART,
+    payload: id,
+  };
+};

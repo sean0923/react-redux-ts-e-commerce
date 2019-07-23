@@ -1,6 +1,6 @@
 import { CartAction, CartActionTypes } from '../rootActions';
 
-import { getCartItemsWithCount } from './cart.util';
+import { increaseCountHelper, dcreaseCountHelper } from './cart.util';
 
 import { ShopItemProps } from '../../components/pages/shop/shoppingData';
 
@@ -32,7 +32,7 @@ export const cartReduccer = (
     case CartActionTypes.ADD_ITEM_TO_CART:
       return {
         ...state,
-        cartItems: getCartItemsWithCount(state.cartItems, action.payload),
+        cartItems: increaseCountHelper(state.cartItems, action.payload),
       };
 
     case CartActionTypes.CLEAR_ITEM_FROM_CART:
@@ -41,6 +41,12 @@ export const cartReduccer = (
         cartItems: state.cartItems.filter((cartItem) => {
           return cartItem.id !== action.payload;
         }),
+      };
+
+    case CartActionTypes.DECREASE_ITEM_COUNT_FROM_CART:
+      return {
+        ...state,
+        cartItems: dcreaseCountHelper(state.cartItems, action.payload),
       };
 
     default:

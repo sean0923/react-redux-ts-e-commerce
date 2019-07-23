@@ -4,7 +4,11 @@ import styled from 'styled-components';
 
 import { CartItemProps } from '../../../redux/cart/cartReducer';
 
-import { clearItemFromCart } from '../../../redux/rootActions';
+import {
+  clearItemFromCart,
+  addItemToCart,
+  decreaseItemCountFromCart,
+} from '../../../redux/rootActions';
 
 interface CheckoutItemProps {
   cartItem: CartItemProps;
@@ -20,9 +24,23 @@ function _CheckoutItem({ cartItem, dispatch }: CheckoutItemProps) {
       </div>
       <div className="name">{name}</div>
       <div className="quantity">
-        <div className="arrow">&#10094;</div>
+        <div
+          className="arrow"
+          onClick={() => {
+            dispatch(decreaseItemCountFromCart(id));
+          }}
+        >
+          &#10094;
+        </div>
         <span className="value">{count}</span>
-        <div className="arrow">&#10095;</div>
+        <div
+          className="arrow"
+          onClick={() => {
+            dispatch(addItemToCart(cartItem));
+          }}
+        >
+          &#10095;
+        </div>
       </div>
       <div className="price">{price}</div>
       <div
