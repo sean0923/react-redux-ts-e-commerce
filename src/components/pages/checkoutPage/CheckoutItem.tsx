@@ -1,15 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, DispatchProp } from 'react-redux';
 import styled from 'styled-components';
 
 import { CartItemProps } from '../../../redux/cart/cartReducer';
 
+import { removeItemFromCart } from '../../../redux/rootActions';
+
 interface CheckoutItemProps {
   cartItem: CartItemProps;
+  dispatch: Function;
 }
 
-function _CheckoutItem({ cartItem }: CheckoutItemProps) {
-  const { imageUrl, name, count, price } = cartItem;
+function _CheckoutItem({ cartItem, dispatch }: CheckoutItemProps) {
+  const { imageUrl, name, count, price, id } = cartItem;
   return (
     <Wrapper>
       <div className="image-container">
@@ -18,7 +21,14 @@ function _CheckoutItem({ cartItem }: CheckoutItemProps) {
       <div className="name">{name}</div>
       <div className="quantity">{count}</div>
       <div className="price">{price}</div>
-      <div className="remove-button">&#10005;</div>
+      <div
+        className="remove-button"
+        onClick={() => {
+          dispatch(removeItemFromCart(id));
+        }}
+      >
+        &#10005;
+      </div>
     </Wrapper>
   );
 }
