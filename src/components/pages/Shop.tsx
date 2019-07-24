@@ -3,7 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { RootReducerProp } from '../../redux/rootReducer';
-import { ShopCollectionProps, ShopReducerProps } from '../../redux/shop/shopReducer';
+import { ShopReducerProps } from '../../redux/shop/shopReducer';
+import { ShopCollectionProps } from '../../redux/shop/shop.data';
+
 import { CollectionPreview } from './shop/CollectionPreview';
 
 interface ShopProps {

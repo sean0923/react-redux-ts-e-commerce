@@ -1,5 +1,5 @@
 import { CartItemProps } from './cartReducer';
-import { ShopItemProps } from '../../components/pages/shop/shoppingData';
+import { ShopItemProps } from '../shop/shop.data';
 
 export const increaseCountHelper = (
   cartItems: CartItemProps[],

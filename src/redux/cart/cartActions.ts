@@ -1,5 +1,5 @@
 import { CartActionTypes } from './cartActionTypes';
-import { ShopItemProps } from '../../components/pages/shop/shoppingData';
+import { ShopItemProps } from '../shop/shop.data';
 
 export interface ToggleIsCartHiddenAction {
   type: CartActionTypes.TOGGLE_IS_CART_HIDDEN;

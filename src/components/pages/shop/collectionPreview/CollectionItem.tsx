@@ -7,7 +7,7 @@ import { addItemToCart } from '../../../../redux/rootActions';
 
 import './collectionItem/collection-item.styles.scss';
 
-import { ShopItemProps } from '../shoppingData';
+import { ShopItemProps } from '../../../../redux/shop/shop.data';
 import { CustomButton } from '../../../common/CustomButton';
 
 interface CollectionItemProps extends ShopItemProps {

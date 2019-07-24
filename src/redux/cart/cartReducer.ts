@@ -2,7 +2,7 @@ import { CartAction, CartActionTypes } from '../rootActions';
 
 import { increaseCountHelper, dcreaseCountHelper } from './cart.util';
 
-import { ShopItemProps } from '../../components/pages/shop/shoppingData';
+import { ShopItemProps } from '../shop/shop.data';
 
 export interface CartItemProps extends ShopItemProps {
   count: number;

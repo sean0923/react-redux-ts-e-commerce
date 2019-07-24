@@ -3,7 +3,7 @@ import './collectionPreview/collection-preview.styles.scss';
 
 import { CollectionItem } from './collectionPreview/CollectionItem';
 
-import { ShopCollectionProps, ShopItemProps } from './shoppingData';
+import { ShopCollectionProps, ShopItemProps } from '../../../redux/shop/shop.data';
 
 function CollectionPreview({ title, routeName, items }: ShopCollectionProps) {
   return (
