@@ -15,8 +15,8 @@ interface ShopProps {
 function _CollectionOverview({ shopReducer }: ShopProps) {
   return (
     <div className="">
-      {shopReducer.map((collection: ShopCollectionProps) => {
-        return <CollectionPreview key={collection.id} {...collection} />;
+      {shopReducer.map((items: ShopCollectionProps) => {
+        return <CollectionPreview key={items.id} {...items} />;
       })}
     </div>
   );
