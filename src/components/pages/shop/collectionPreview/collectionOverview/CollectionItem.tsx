@@ -3,12 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { addItemToCart } from '../../../../redux/rootActions';
+import { addItemToCart } from '../../../../../redux/rootActions';
 
 import './collectionItem/collection-item.styles.scss';
 
-import { ShopItemProps } from '../../../../redux/shop/shop.data';
-import { CustomButton } from '../../../common/CustomButton';
+import { ShopItemProps } from '../../../../../redux/shop/shop.data';
+import { CustomButton } from '../../../../common/CustomButton';
 
 interface CollectionItemProps extends ShopItemProps {
   addItemToCart: typeof addItemToCart;

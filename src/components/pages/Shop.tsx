@@ -1,33 +1,18 @@
 import React from 'react';
+import { Switch, Route, RouteComponentProps } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { CollectionOverview } from './shop/collectionPreview/CollectionOverview';
+import { Category } from './shop/Category';
 
-import { RootReducerProp } from '../../redux/rootReducer';
-import { ShopReducerProps } from '../../redux/shop/shopReducer';
-import { ShopCollectionProps } from '../../redux/shop/shop.data';
-
-import { CollectionPreview } from './shop/CollectionPreview';
-
-interface ShopProps {
-  shopReducer: ShopReducerProps;
-}
-
-function _Shop({ shopReducer }: ShopProps) {
+function Shop({ match }: RouteComponentProps) {
   return (
-    <div>
-      {shopReducer.map((collection: ShopCollectionProps) => {
-        return <CollectionPreview key={collection.id} {...collection} />;
-      })}
+    <div className="shop-page">
+      <Switch>
+        <Route exact path={`${match.path}`} component={CollectionOverview} />
+        <Route path={`${match.path}/:categoryId`} component={Category} />
+      </Switch>
     </div>
   );
 }
-
-const mapStateToProps = (state: RootReducerProp) => {
-  return {
-    shopReducer: state.shopReducer,
-  };
-};
-
-const Shop = connect(mapStateToProps)(_Shop);
 
 export { Shop };

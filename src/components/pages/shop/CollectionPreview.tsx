@@ -1,7 +1,7 @@
 import React from 'react';
 import './collectionPreview/collection-preview.styles.scss';
 
-import { CollectionItem } from './collectionPreview/CollectionItem';
+import { CollectionItem } from './collectionPreview/collectionOverview/CollectionItem';
 
 import { ShopCollectionProps, ShopItemProps } from '../../../redux/shop/shop.data';
 
