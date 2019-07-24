@@ -1,16 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import "./menuItem/menuItem.styles.scss";
+import { MenuItemProps } from '../../../../redux/directory/directoryReducer';
 
-export interface MenuItemProps {
-  title: string;
-  imageUrl: string;
-  id: number;
-  linkUrl: string;
-  size?: "large";
-}
+import './menuItem/menuItem.styles.scss';
+
+// export interface MenuItemProps {
+//   title: string;
+//   imageUrl: string;
+//   id: number;
+//   linkUrl: string;
+//   size?: "large";
+// }
 
 interface Props extends RouteComponentProps {
   menuItem: MenuItemProps;
@@ -39,5 +41,5 @@ interface WrapperProp {
 }
 const Wrapper = styled.div<WrapperProp>`
   background-image: url(${({ imageUrl }) => imageUrl});
-  height: ${({ size }) => size && "380px"};
+  height: ${({ size }) => size && '380px'};
 `;
