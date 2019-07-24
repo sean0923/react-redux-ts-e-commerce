@@ -3,22 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { RootReducerProp } from '../../redux/rootReducer';
-import { UserReducerProps } from '../../redux/user/userReducer';
-
+import { ShopCollectionProps, ShopReducerProps } from '../../redux/shop/shopReducer';
 import { CollectionPreview } from './shop/CollectionPreview';
 
-import { SHOP_DATA, ShopCollectionProps } from './shop/shoppingData';
-
-interface _ShopProps {
-  userReducer: UserReducerProps;
+interface ShopProps {
+  shopReducer: ShopReducerProps;
 }
 
-function _Shop({ userReducer }: _ShopProps) {
-  const [collections] = React.useState(SHOP_DATA);
-
+function _Shop({ shopReducer }: ShopProps) {
   return (
     <div>
-      {collections.map((collection: ShopCollectionProps) => {
+      {shopReducer.map((collection: ShopCollectionProps) => {
         return <CollectionPreview key={collection.id} {...collection} />;
       })}
     </div>
@@ -27,7 +22,7 @@ function _Shop({ userReducer }: _ShopProps) {
 
 const mapStateToProps = (state: RootReducerProp) => {
   return {
-    userReducer: state.userReducer,
+    shopReducer: state.shopReducer,
   };
 };
 
