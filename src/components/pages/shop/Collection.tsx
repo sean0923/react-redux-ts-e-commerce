@@ -9,15 +9,10 @@ import { RootReducerProp } from '../../../redux/rootReducer';
 import { selectCollection } from '../../../redux/shop/shop.selector';
 import { ShopCollectionProps, ShopItemProps } from '../../../redux/shop/shop.data';
 
-// interface CollectionProps extends RouteComponentProps<ParamProps> {
-//   collection: ShopItemProps;
-// }
-
 interface CollectionProps {
   collection: ShopCollectionProps | undefined;
 }
 
-// function _Collection({ match, collection }: ) {
 function _Collection({ collection }: CollectionProps) {
   if (!collection) {
     return null;

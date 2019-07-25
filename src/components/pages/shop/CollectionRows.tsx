@@ -4,23 +4,23 @@ import map from 'lodash/map';
 
 import { connect } from 'react-redux';
 
-import { CollectionPreview } from '../CollectionPreview';
+import { CollectionRow } from './collectionRows/CollectionRow';
 
-import { RootReducerProp } from '../../../../redux/rootReducer';
-import { ShopCollectionProps, ShopDataProps } from '../../../../redux/shop/shop.data';
+import { RootReducerProp } from '../../../redux/rootReducer';
+import { ShopCollectionProps, ShopDataProps } from '../../../redux/shop/shop.data';
 
-import { selectCollections } from '../../../../redux/shop/shop.selector';
+import { selectCollections } from '../../../redux/shop/shop.selector';
 
 interface ShopProps {
   collections: ShopDataProps;
 }
 
-function _CollectionOverview({ collections }: ShopProps) {
+function _CollectionRows({ collections }: ShopProps) {
   return (
     <Wrapper>
       <div className="collections-overview">
         {map(collections, (items: ShopCollectionProps) => {
-          return <CollectionPreview key={items.id} {...items} />;
+          return <CollectionRow key={items.id} {...items} />;
         })}
       </div>
     </Wrapper>
@@ -33,9 +33,9 @@ const mapStateToProps = (state: RootReducerProp) => {
   };
 };
 
-const CollectionOverview = connect(mapStateToProps)(_CollectionOverview);
+const CollectionRows = connect(mapStateToProps)(_CollectionRows);
 
-export { CollectionOverview };
+export { CollectionRows };
 
 const Wrapper = styled.div`
   .collections-overview {
