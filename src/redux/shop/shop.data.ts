@@ -12,8 +12,12 @@ export interface ShopCollectionProps {
   items: ShopItemProps[];
 }
 
-export const SHOP_DATA: ShopCollectionProps[] = [
-  {
+export interface ShopDataProps {
+  [key: string]: ShopCollectionProps;
+}
+
+export const SHOP_DATA: ShopDataProps = {
+  hats: {
     id: 1,
     title: 'Hats',
     routeName: 'hats',
@@ -74,7 +78,7 @@ export const SHOP_DATA: ShopCollectionProps[] = [
       },
     ],
   },
-  {
+  sneakers: {
     id: 2,
     title: 'Sneakers',
     routeName: 'sneakers',
@@ -129,7 +133,7 @@ export const SHOP_DATA: ShopCollectionProps[] = [
       },
     ],
   },
-  {
+  jackets: {
     id: 3,
     title: 'Jackets',
     routeName: 'jackets',
@@ -166,7 +170,7 @@ export const SHOP_DATA: ShopCollectionProps[] = [
       },
     ],
   },
-  {
+  womens: {
     id: 4,
     title: 'Womens',
     routeName: 'womens',
@@ -215,7 +219,7 @@ export const SHOP_DATA: ShopCollectionProps[] = [
       },
     ],
   },
-  {
+  mens: {
     id: 5,
     title: 'Mens',
     routeName: 'mens',
@@ -258,4 +262,4 @@ export const SHOP_DATA: ShopCollectionProps[] = [
       },
     ],
   },
-];
+};

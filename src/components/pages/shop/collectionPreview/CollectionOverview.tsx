@@ -1,24 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import map from 'lodash/map';
 
 import { connect } from 'react-redux';
 
 import { CollectionPreview } from '../CollectionPreview';
 
 import { RootReducerProp } from '../../../../redux/rootReducer';
-import { ShopCollectionProps } from '../../../../redux/shop/shop.data';
+import { ShopCollectionProps, ShopDataProps } from '../../../../redux/shop/shop.data';
 
 import { selectCollections } from '../../../../redux/shop/shop.selector';
 
 interface ShopProps {
-  collections: ShopCollectionProps[];
+  collections: ShopDataProps;
 }
 
 function _CollectionOverview({ collections }: ShopProps) {
   return (
     <Wrapper>
       <div className="collections-overview">
-        {collections.map((items: ShopCollectionProps) => {
+        {map(collections, (items: ShopCollectionProps) => {
           return <CollectionPreview key={items.id} {...items} />;
         })}
       </div>

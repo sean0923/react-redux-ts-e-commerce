@@ -1,7 +1,7 @@
-import { SHOP_DATA, ShopCollectionProps } from './shop.data';
+import { SHOP_DATA, ShopDataProps } from './shop.data';
 
 export interface ShopReducerProps {
-  collections: ShopCollectionProps[];
+  collections: ShopDataProps;
 }
 
 const INITIAL_STATE: ShopReducerProps = { collections: SHOP_DATA };

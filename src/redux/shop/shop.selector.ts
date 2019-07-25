@@ -30,11 +30,7 @@ export const selectCollection = (collectionIdKey: string) => {
   return createSelector(
     [selectCollections],
     (collections): ShopCollectionProps | undefined => {
-      return collections.find((collection) => {
-        return (
-          collection.id === COLLECTION_ID_MAP[collectionIdKey as keyof COLLECTION_ID_MAP_PROPS]
-        );
-      });
+      return collections[collectionIdKey];
     }
   );
 };
