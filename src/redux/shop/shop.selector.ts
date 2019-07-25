@@ -11,14 +11,6 @@ interface COLLECTION_ID_MAP_PROPS {
   mens: number;
 }
 
-const COLLECTION_ID_MAP = {
-  hats: 1,
-  sneakers: 2,
-  jackets: 3,
-  womens: 4,
-  mens: 5,
-};
-
 export const selectShop = (state: RootReducerProp) => state.shopReducer;
 
 export const selectCollections = createSelector(
