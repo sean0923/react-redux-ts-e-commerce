@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { CollectionItem } from './collectionPreview/collectionOverview/CollectionItem';
 
 import { RootReducerProp } from '../../../redux/rootReducer';
 import { selectCollection } from '../../../redux/shop/shop.selector';
-import { ShopCollectionProps } from '../../../redux/shop/shop.data';
+import { ShopCollectionProps, ShopItemProps } from '../../../redux/shop/shop.data';
 
 // interface CollectionProps extends RouteComponentProps<ParamProps> {
 //   collection: ShopItemProps;
@@ -16,17 +19,22 @@ interface CollectionProps {
 
 // function _Collection({ match, collection }: ) {
 function _Collection({ collection }: CollectionProps) {
-  console.log('collection: ', collection);
-  // const { params }: { params: ParamsProps } = match;
-  // params.collectionId
+  if (!collection) {
+    return null;
+  }
 
-  // (match.params as ParamsProps).collectionId;
+  const { items, title } = collection;
   return (
-    <div>
-      <div>aa</div>
-
-      {/* <h2>Collection Page {match.params}</h2> */}
-    </div>
+    <Wrapper>
+      <div className="collection-page">
+        <h2 className="title">{title}</h2>
+        <div className="items">
+          {items.map((item: ShopItemProps) => {
+            return <CollectionItem key={item.id} item={item} />;
+          })}
+        </div>
+      </div>
+    </Wrapper>
   );
 }
 
@@ -43,3 +51,25 @@ const mapStateToProps = (state: RootReducerProp, ownProps: RouteComponentProps<P
 const Collection = connect(mapStateToProps)(_Collection);
 
 export { Collection };
+
+const Wrapper = styled.div`
+  .collection-page {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 38px;
+      margin: 0 auto 30px;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 10px;
+
+      & .collection-item {
+        margin-bottom: 30px;
+      }
+    }
+  }
+`;

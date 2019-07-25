@@ -10,11 +10,14 @@ import './collectionItem/collection-item.styles.scss';
 import { ShopItemProps } from '../../../../../redux/shop/shop.data';
 import { CustomButton } from '../../../../common/CustomButton';
 
-interface CollectionItemProps extends ShopItemProps {
+interface CollectionItemProps {
   addItemToCart: typeof addItemToCart;
+  item: ShopItemProps;
 }
 
-function _CollectionItem({ id, name, imageUrl, price, addItemToCart }: CollectionItemProps) {
+function _CollectionItem({ item, addItemToCart }: CollectionItemProps) {
+  const { id, name, imageUrl, price } = item;
+
   return (
     <div className="collection-item">
       <Img className="image" imageUrl={imageUrl} />

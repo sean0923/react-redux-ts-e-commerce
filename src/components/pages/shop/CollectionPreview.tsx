@@ -14,7 +14,7 @@ function CollectionPreview({ title, routeName, items }: ShopCollectionProps) {
         {items
           .filter((item, idx) => idx < 4)
           .map((item: ShopItemProps) => {
-            return <CollectionItem key={item.id} {...item} />;
+            return <CollectionItem key={item.id} item={item} />;
           })}
       </div>
     </div>
