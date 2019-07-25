@@ -6,26 +6,18 @@ import { MenuItemProps } from '../../../../redux/directory/directoryReducer';
 
 import './menuItem/menuItem.styles.scss';
 
-// export interface MenuItemProps {
-//   title: string;
-//   imageUrl: string;
-//   id: number;
-//   linkUrl: string;
-//   size?: "large";
-// }
-
 interface Props extends RouteComponentProps {
   menuItem: MenuItemProps;
 }
 
-function _MenuItem(props: Props) {
-  const { menuItem } = props;
+function _MenuItem({ menuItem, history }: Props) {
+  const { title, imageUrl, linkUrl, size } = menuItem;
 
   return (
-    <div className="menu-item">
-      <Wrapper imageUrl={menuItem.imageUrl} size={menuItem.size} className="background-img" />
+    <div className="menu-item" onClick={() => history.push(linkUrl)}>
+      <Wrapper imageUrl={imageUrl} size={size} className="background-img" />
       <div className="content">
-        <h1 className="title">{menuItem.title}</h1>
+        <h1 className="title">{title}</h1>
         <div className="subtitle">SHOW NOW</div>
       </div>
     </div>
