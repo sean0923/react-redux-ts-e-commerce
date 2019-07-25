@@ -1,35 +1,69 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface CustomButtonProps {
   type?: 'button' | 'submit';
   onClick?(): void;
   isGoogleSignIn?: boolean;
   isInverted?: boolean;
-  isForCollectionItem?: boolean;
   children: React.ReactChildren | string;
 }
 
-function CustomButton({
-  children,
-  isGoogleSignIn,
-  isInverted,
-  isForCollectionItem,
-  ...rest
-}: CustomButtonProps) {
-  let className = 'custom-button';
-
-  if (isGoogleSignIn) className += ' google-sign-in';
-  if (isInverted) className += ' inverted';
-
+function CustomButton({ children, isGoogleSignIn, isInverted, ...rest }: CustomButtonProps) {
   return (
-    <ButtonWrapper className={className} {...rest}>
+    <ButtonWrapper isGoogleSignIn={isGoogleSignIn} isInverted={isInverted} {...rest}>
       {children}
     </ButtonWrapper>
   );
 }
 
 export { CustomButton };
+
+const defaultStyle = css`
+  background-color: black;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+`;
+
+const googleSigninStyle = css`
+  background-color: #4285f4;
+  color: white;
+
+  &:hover {
+    background-color: #357ae8;
+    border: none;
+  }
+`;
+
+const invertedStyle = css`
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    border: none;
+  }
+`;
+
+const getCustomButtonStyle = (props: { isGoogleSignIn?: boolean; isInverted?: boolean }) => {
+  switch (true) {
+    case props.isGoogleSignIn:
+      return googleSigninStyle;
+
+    case props.isInverted:
+      return invertedStyle;
+
+    default:
+      return defaultStyle;
+  }
+};
 
 const ButtonWrapper = styled.button`
   display: flex;
@@ -42,39 +76,12 @@ const ButtonWrapper = styled.button`
   line-height: 50px;
   padding: 0 35px 0 35px;
   font-size: 15px;
-  background-color: black;
-  color: white;
+
   text-transform: uppercase;
   font-family: 'Open Sans Condensed';
   font-weight: bolder;
   border: none;
   cursor: pointer;
 
-  &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-  }
-
-  &.google-sign-in {
-    background-color: #4285f4;
-    color: white;
-
-    &:hover {
-      background-color: #357ae8;
-      border: none;
-    }
-  }
-
-  &.inverted {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-
-    &:hover {
-      background-color: black;
-      color: white;
-      border: none;
-    }
-  }
+  ${getCustomButtonStyle}
 `;
