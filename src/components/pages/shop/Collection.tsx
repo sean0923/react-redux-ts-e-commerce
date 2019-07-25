@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CollectionItem } from './collectionPreview/collectionOverview/CollectionItem';
+import { CollectionItem } from './common/CollectionItem';
 
 import { RootReducerProp } from '../../../redux/rootReducer';
 import { selectCollection } from '../../../redux/shop/shop.selector';
