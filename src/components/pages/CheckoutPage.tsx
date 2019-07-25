@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { CheckoutItem } from './checkoutPage/CheckoutItem';
+import { StripeCheckoutButton } from './checkoutPage/StripeCheckoutButton';
 
 import { RootReducerProp } from '../../redux/rootReducer';
 import { CartItemProps } from '../../redux/cart/cartReducer';
@@ -44,6 +45,12 @@ function _CheckoutPage({ totalCost, cartItems }: CheckoutPageProps) {
           <div className="total">
             <span>{`TOTAL: $${totalCost}`}</span>
           </div>
+          <div className="test-warning">
+            *Please use the following test credit card for payments
+            <br />
+            4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+          </div>
+          <StripeCheckoutButton price={totalCost} />
         </div>
       </div>
     </Wrapper>
@@ -91,6 +98,18 @@ const Wrapper = styled.div`
       margin-top: 30px;
       margin-left: auto;
       font-size: 36px;
+    }
+
+    .test-warning {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 24px;
+      color: red;
+    }
+
+    button {
+      margin-left: auto;
+      margin-top: 50px;
     }
   }
 `;
