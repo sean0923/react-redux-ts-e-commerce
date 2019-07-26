@@ -64,7 +64,7 @@ const Wrapper = styled.div`
     margin-bottom: 5px;
   }
 
-  .custom-button {
+  button {
     width: 80%;
     opacity: 0.7;
     position: absolute;
@@ -77,7 +77,7 @@ const Wrapper = styled.div`
       opacity: 0.8;
     }
 
-    .custom-button {
+    button {
       opacity: 0.85;
       display: flex;
     }

@@ -52,7 +52,11 @@ const invertedStyle = css`
   }
 `;
 
-const getCustomButtonStyle = (props: { isGoogleSignIn?: boolean; isInverted?: boolean }) => {
+interface GetCustomButtonStyleProps {
+  isGoogleSignIn?: boolean;
+  isInverted?: boolean;
+}
+const getCustomButtonStyle = (props: GetCustomButtonStyleProps) => {
   switch (true) {
     case props.isGoogleSignIn:
       return googleSigninStyle;
