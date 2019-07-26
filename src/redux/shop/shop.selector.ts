@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { RootReducerProp } from '../rootReducer';
-import { ShopCollectionProps, SHOP_DATA } from './shop.data';
+import { ShopCollectionProps } from './shop.data';
 
 export const selectShop = (state: RootReducerProp) => state.shopReducer;
 

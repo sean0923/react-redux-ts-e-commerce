@@ -1,31 +1,42 @@
 import React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
+import keyBy from 'lodash/keyBy';
+import { connect } from 'react-redux';
 
-// import { CollectionOverview } from './shop/collectionPreview/CollectionOverview';
+import { ShopItemProps } from '../../redux/shop/shop.data';
+import { updateCollections } from '../../redux/rootActions';
 import { CollectionRows } from './shop/CollectionRows';
 import { Collection } from './shop/Collection';
 import { firestore } from '../../firebase/firebase';
 
-function Shop({ match }: RouteComponentProps) {
+interface Props extends RouteComponentProps {
+  dispatch: Function;
+}
+
+function _Shop({ match, dispatch }: Props) {
   React.useEffect(() => {
     return listenToCollection();
   }, []);
 
   const listenToCollection = () => {
     return firestore.collection('collections').onSnapshot((snapshot) => {
-      snapshot.docs.map((doc) => {
-        console.log('doc.data(): ', doc.data());
-      });
+      const transformedCollection = keyBy(transformCollections(snapshot), (o) => o.routeName);
+      dispatch(updateCollections(transformedCollection));
+      console.log('transformedCollection: ', transformedCollection);
     });
   };
 
-  // const listenToCollection = () => {
-  //   return firestore.collection('collections').onSnapshot((snapshot) => {
-  //     snapshot.docs.map((doc) => {
-  //       console.log('doc.data(): ', doc.data());
-  //     });
-  //   });
-  // };
+  const transformCollections = (snapshot: firebase.firestore.QuerySnapshot) => {
+    return snapshot.docs.map((doc) => {
+      const { title, items } = doc.data() as { title: string; items: ShopItemProps[] };
+      return {
+        id: doc.id,
+        routeName: encodeURI(title.toLowerCase()),
+        title,
+        items,
+      };
+    });
+  };
 
   return (
     <div className="shop-page">
@@ -36,5 +47,7 @@ function Shop({ match }: RouteComponentProps) {
     </div>
   );
 }
+
+const Shop = connect(null)(_Shop);
 
 export { Shop };
