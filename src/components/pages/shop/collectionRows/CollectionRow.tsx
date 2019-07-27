@@ -1,15 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { CollectionItem } from '../common/CollectionItem';
 
-import { ShopCollectionProps, ShopItemProps } from '../../../../redux/shop/shop.data';
+import { ShopItemProps, ShopCollectionProps } from '../../../../redux/shop/shop.data';
 
-function CollectionRow({ title, routeName, items }: ShopCollectionProps) {
+interface Props extends RouteComponentProps, ShopCollectionProps {}
+function _CollectionRow({ title, routeName, items, history, match }: Props) {
   return (
     <Wrapper>
       <div className="collection-preview">
-        <h1 className="title">{title}</h1>
+        <h1 className="title" onClick={() => history.push(`${match.path}/${routeName}`)}>
+          {title}
+        </h1>
 
         <div className="preview">
           {items
@@ -23,6 +27,8 @@ function CollectionRow({ title, routeName, items }: ShopCollectionProps) {
   );
 }
 
+const CollectionRow = withRouter(_CollectionRow);
+
 export { CollectionRow };
 
 const Wrapper = styled.div`
@@ -32,8 +38,13 @@ const Wrapper = styled.div`
     margin-bottom: 30px;
 
     .title {
+      cursor: pointer;
       font-size: 28px;
       margin-bottom: 25px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .preview {

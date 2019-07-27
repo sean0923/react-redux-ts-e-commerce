@@ -1,53 +1,57 @@
 import React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
-import keyBy from 'lodash/keyBy';
 import { connect } from 'react-redux';
 
-import { ShopItemProps } from '../../redux/shop/shop.data';
-import { updateCollections } from '../../redux/rootActions';
+import { RootReducerProp } from '../../redux/rootReducer';
+
 import { CollectionRows } from './shop/CollectionRows';
 import { Collection } from './shop/Collection';
-import { firestore } from '../../firebase/firebase';
+
+import { WithSpinner } from '../hoc/with-spinner/with-spinner.component';
+
+import { fetchCollectionAsync } from '../../redux/rootActions';
+import { selectIsFetchingCollections } from '../../redux/shop/shop.selector';
+
+const CollectionRowsWithSpinner = WithSpinner(CollectionRows);
+const CollectionWithSpinner = WithSpinner(Collection);
 
 interface Props extends RouteComponentProps {
   dispatch: Function;
+  isFetchingCollection: boolean;
 }
 
-function _Shop({ match, dispatch }: Props) {
+function _Shop(props: Props) {
+  const { match, dispatch, isFetchingCollection } = props;
+
   React.useEffect(() => {
-    return listenToCollection();
-  }, []);
-
-  const listenToCollection = () => {
-    return firestore.collection('collections').onSnapshot((snapshot) => {
-      const transformedCollection = keyBy(transformCollections(snapshot), (o) => o.routeName);
-      dispatch(updateCollections(transformedCollection));
-      console.log('transformedCollection: ', transformedCollection);
-    });
-  };
-
-  const transformCollections = (snapshot: firebase.firestore.QuerySnapshot) => {
-    return snapshot.docs.map((doc) => {
-      const { title, items } = doc.data() as { title: string; items: ShopItemProps[] };
-      return {
-        id: doc.id,
-        routeName: encodeURI(title.toLowerCase()),
-        title,
-        items,
-      };
-    });
-  };
+    dispatch(fetchCollectionAsync());
+  }, [dispatch]);
 
   return (
     <div className="shop-page">
       <Switch>
-        <Route exact path={`${match.path}`} component={CollectionRows} />
-        <Route path={`${match.path}/:collectionId`} component={Collection} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={(props) => (
+            <CollectionRowsWithSpinner isLoading={isFetchingCollection} {...props} />
+          )}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          render={(props) => <CollectionWithSpinner isLoading={isFetchingCollection} {...props} />}
+        />
       </Switch>
     </div>
   );
 }
 
-const Shop = connect(null)(_Shop);
+const mapStateToProps = (state: RootReducerProp) => {
+  return {
+    isFetchingCollection: selectIsFetchingCollections(state),
+  };
+};
+
+const Shop = connect(mapStateToProps)(_Shop);
 
 export { Shop };

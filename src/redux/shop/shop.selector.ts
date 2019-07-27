@@ -10,6 +10,11 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
+export const selectIsFetchingCollections = createSelector(
+  [selectShop],
+  (shop) => shop.isFetchingCollections
+);
+
 export const selectCollection = (collectionIdKey: string) => {
   return createSelector(
     [selectCollections],

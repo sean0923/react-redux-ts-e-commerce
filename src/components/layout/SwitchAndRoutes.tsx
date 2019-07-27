@@ -11,7 +11,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 function SwitchAndRoutes() {
   const { authPropsFromFirebase } = React.useContext(AuthContext);
-  console.log('authPropsFromFirebase: ', authPropsFromFirebase);
+
   return (
     <Switch>
       <Route exact path="/" component={Home} />

@@ -1,7 +1,16 @@
-import { UpdateCollectionAction } from './shop.action';
+import {
+  FetchCollectionStartAction,
+  FetchCollectionSuccessAction,
+  FetchCollectionFailAction,
+} from './shop.action';
+
+export type ShopAction =
+  | FetchCollectionStartAction
+  | FetchCollectionSuccessAction
+  | FetchCollectionFailAction;
 
 export enum ShopActionType {
-  UPDATE_COLLECTIONS = 'UPDATE_COLLECTIONS',
+  FETCH_COLLECTION_START = 'FETCH_COLLECTION_START',
+  FETCH_COLLECTION_SUCCESS = 'FETCH_COLLECTION_SUCCESS',
+  FETCH_COLLECTION_FAIL = 'FETCH_COLLECTION_FAIL',
 }
-
-export type ShopAction = UpdateCollectionAction;
