@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { ShoppingCartItem } from './shoppingCartDropdown/ShoppingCartItem';
@@ -17,7 +18,11 @@ interface ShoppingCardDropdownProps extends RouteComponentProps {
   dispatch: Function;
 }
 
-function _ShoppingCartDropdown({ cartItems, history, dispatch }: ShoppingCardDropdownProps) {
+function _ShoppingCartDropdown({
+  cartItems,
+  history,
+  dispatch,
+}: ShoppingCardDropdownProps): JSX.Element {
   return (
     <Wrapper>
       <div className="cart-items">
@@ -48,7 +53,10 @@ const mapStateToProps = (state: RootReducerProp) => {
   };
 };
 
-const ShoppingCartDropdown = withRouter(connect(mapStateToProps)(_ShoppingCartDropdown) as any);
+const ShoppingCartDropdown = compose<any>(
+  withRouter,
+  connect(mapStateToProps)
+)(_ShoppingCartDropdown);
 
 export { ShoppingCartDropdown };
 
