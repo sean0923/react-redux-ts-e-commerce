@@ -9,7 +9,7 @@ import { Collection } from './shop/Collection';
 
 import { WithSpinner } from '../hoc/with-spinner/with-spinner.component';
 
-import { fetchCollectionAsync } from '../../redux/rootActions';
+import { fetchCollectionAsync, fetchCollectionStart } from '../../redux/rootActions';
 import { selectIsFetchingCollections } from '../../redux/shop/shop.selector';
 
 const CollectionRowsWithSpinner = WithSpinner(CollectionRows);
@@ -24,7 +24,8 @@ function _Shop(props: Props) {
   const { match, dispatch, isFetchingCollection } = props;
 
   React.useEffect(() => {
-    dispatch(fetchCollectionAsync());
+    // dispatch(fetchCollectionAsync());
+    dispatch(fetchCollectionStart());
   }, [dispatch]);
 
   return (
