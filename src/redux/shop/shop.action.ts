@@ -24,6 +24,14 @@ export interface FetchCollectionSuccessAction {
   type: ShopActionType.FETCH_COLLECTION_SUCCESS;
   payload: ShopDataProps;
 }
+
+export const fetchCollectionSuccess = (collections: ShopDataProps) => {
+  return {
+    type: ShopActionType.FETCH_COLLECTION_SUCCESS,
+    payload: collections,
+  };
+};
+
 export const fetchCollectionAsync = () => {
   return (dispatch: Dispatch) => {
     dispatch<FetchCollectionStartAction>(fetchCollectionStart());
