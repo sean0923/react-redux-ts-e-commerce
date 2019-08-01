@@ -1,0 +1,29 @@
+{
+  "name": "react-redux-ts-e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-functions": "cd functions && npm run build",
+    "build": "concurrently \"cd client && npm run build\" \"npm run build-functions\"",
+    "serve-functions": "npm run build-functions && cd functions && npm run serve",
+    "serve": "npm run build && firebase serve --only functions,hosting",
+    "start-client": "cd client && npm start",
+    "start": "npm run start-client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean0923/react-redux-ts-e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sean0923/react-redux-ts-e-commerce/issues"
+  },
+  "homepage": "https://github.com/sean0923/react-redux-ts-e-commerce#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
