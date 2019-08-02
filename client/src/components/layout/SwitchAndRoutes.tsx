@@ -6,6 +6,7 @@ import { Shop } from '../pages/Shop';
 import { SignInAndSignUp } from '../pages/SignInAndSignUp';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { FirebaseDataUpload } from '../pages/FirebaseDataUpload';
+import { TestPage } from '../pages/test.page/test.page.component';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -18,6 +19,7 @@ function SwitchAndRoutes() {
       <Route path="/shop" component={Shop} />
       <Route exact path="/checkout" component={CheckoutPage} />
       <Route exact path="/firebase-data-upload" component={FirebaseDataUpload} />
+      <Route exact path="/test-page" component={TestPage} />
       {/* <Route path="/sign-in-and-sign-up" component={SignInAndSignUp} /> */}
       <Route
         exact
