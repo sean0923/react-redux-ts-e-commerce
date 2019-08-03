@@ -17,16 +17,17 @@ export const customFunc1 = functions.https.onRequest((request, response) => {
 const stripe = new Stripe(functions.config().stripe.secret_key);
 
 export const stripTest = functions.https.onCall(async (data, context) => {
+  console.log('context: ', context);
   console.log('data: ', data);
 
-  const { token } = data;
+  const { token, amount } = data;
 
   try {
     // const customer = await stripe.customers.create({ email: 'test@email.com' });
     // const source = await stripe.customers.createSource(customer.id, { source: token.id });
 
     const chargePromise = stripe.charges.create({
-      amount: 100,
+      amount,
       currency: 'usd',
       source: token.id,
     });

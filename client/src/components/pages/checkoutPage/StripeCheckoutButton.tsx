@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactStripeCheckout, { Token } from 'react-stripe-checkout';
+import { firebase } from '../../../firebase/firebase';
+
 import { publishableKey } from '../../../config/stripe-config';
 
 interface Props {
@@ -10,8 +12,13 @@ function StripeCheckoutButton({ price }: Props) {
   const centPrice = price * 100;
 
   const onToken = (token: Token) => {
-    console.log('token: ', token);
-    alert('Payment Successful');
+    firebase
+      .functions()
+      .httpsCallable('stripTest')({ token, amount: centPrice })
+      .then((data) => {
+        console.log('data: ', data);
+        alert('Payment Successful');
+      });
   };
 
   return (
